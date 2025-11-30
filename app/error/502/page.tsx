@@ -155,7 +155,7 @@ export default function Error502() {
 
 export default function Error502() {
   return (
-    <Suspense>
+    <Suspense fallback={}>
       <Error502Content />
     </Suspense>
   )
