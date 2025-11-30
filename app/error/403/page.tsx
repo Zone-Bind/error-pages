@@ -1,11 +1,11 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, ShieldBan, Check, X } from "lucide-react"
 
-export default function Error403() {
+function Error403Content() {
   const searchParams = useSearchParams()
   const [timestamp, setTimestamp] = useState("")
   const [rayId, setRayId] = useState("")
@@ -104,5 +104,13 @@ export default function Error403() {
         </div>
       </div>
     </>
+  )
+}
+
+export default function Error403() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <Error403Content />
+    </Suspense>
   )
 }
