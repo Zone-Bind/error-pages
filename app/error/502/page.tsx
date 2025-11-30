@@ -2,17 +2,16 @@
 
 import type React from "react"
 import { useEffect, useState } from "react"
-import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, ServerOff, Check, X } from "lucide-react"
+import Location from "../Location"
 
 export default function Error502() {
-  const searchParams = useSearchParams()
   const [timestamp, setTimestamp] = useState("")
   const [rayId, setRayId] = useState("")
   const [hostname, setHostname] = useState("www.example.com")
   const [ipAddress, setIpAddress] = useState<string | null>(null)
   const [showIp, setShowIp] = useState(false)
-  const location = searchParams.get("location") || "Amsterdam"
+  const defaultLocation = "Amsterdam"
 
   useEffect(() => {
     setTimestamp(new Date().toISOString().replace("T", " ").substring(0, 19) + " UTC")
@@ -109,7 +108,7 @@ export default function Error502() {
                 <div className="icon-container"><Server /></div>
                 <div className="status-badge status-working"><Check /></div>
               </div>
-              <div className="node-label">{location}</div>
+              <div className="node-label"><Location defaultLocation={defaultLocation} /></div>
               <div className="node-title">Zone Bind</div>
               <div className="node-status status-working-text">Working</div>
             </div>
