@@ -1,11 +1,11 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useState, Suspense } from "react"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, ServerOff, Check, X } from "lucide-react"
 
-function Error502Content() {
+export default function Error502() {
   const searchParams = useSearchParams()
   const [timestamp, setTimestamp] = useState("")
   const [rayId, setRayId] = useState("")
@@ -93,7 +93,6 @@ function Error502Content() {
           </p>
           <p className="timestamp">{timestamp}</p>
         </div>
-
         <div className="diagram-section">
           <div className="diagram">
             <div className="node">
@@ -105,7 +104,6 @@ function Error502Content() {
               <div className="node-title">Browser</div>
               <div className="node-status status-working-text">Working</div>
             </div>
-
             <div className="node">
               <div className="icon-wrapper">
                 <div className="icon-container"><Server /></div>
@@ -115,7 +113,6 @@ function Error502Content() {
               <div className="node-title">Zone Bind</div>
               <div className="node-status status-working-text">Working</div>
             </div>
-
             <div className="node">
               <div className="icon-wrapper">
                 <div className="icon-container"><ServerOff /></div>
@@ -127,7 +124,6 @@ function Error502Content() {
             </div>
           </div>
         </div>
-
         <div className="content">
           <div>
             <h2>What happened?</h2>
@@ -139,7 +135,6 @@ function Error502Content() {
           </div>
         </div>
       </div>
-
       <div className="footer">
         <div className="footer-content">
           <span className="ray-id">Zone Bind Ray ID: <span>{rayId}</span></span> • Your IP:{" "}
@@ -150,13 +145,5 @@ function Error502Content() {
         </div>
       </div>
     </>
-  )
-}
-
-export default function Error502() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Error502Content />
-    </Suspense>
   )
 }
