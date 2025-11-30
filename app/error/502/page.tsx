@@ -1,11 +1,11 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, ServerOff, Check, X } from "lucide-react"
 
-export default function Error502() {
+function Error502Content() {
   const searchParams = useSearchParams()
   const [timestamp, setTimestamp] = useState("")
   const [rayId, setRayId] = useState("")
