@@ -1,28 +1,9 @@
+"use client"
+
 import type React from "react"
-import type { Metadata } from "next"
 import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, AlertTriangle, Check, X } from "lucide-react"
-
-export const metadata: Metadata = {
-  title: "503 Service Unavailable | Zone Bind Network",
-  description: "Service temporarily unavailable.",
-  robots: "noindex, nofollow",
-  openGraph: {
-    title: "503 Service Unavailable - Zone Bind Network",
-    description: "Service temporarily unavailable.",
-    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
-  },
-  twitter: {
-    card: "summary",
-    title: "503 Service Unavailable - Zone Bind Network",
-    description: "Service temporarily unavailable.",
-    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
-  },
-  icons: {
-    icon: "https://cdn.ricardoneud.com/zone-bind/logo.png",
-  },
-}
 
 function Error503Content() {
   const searchParams = useSearchParams()
@@ -57,6 +38,52 @@ function Error503Content() {
 
   return (
     <>
+      <style jsx global>{`
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100%; }
+        body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, "Helvetica Neue", Arial, sans-serif; background: linear-gradient(135deg, #0a0a0a 0%, #0f0c18 50%, #0a0a0a 100%); background-attachment: fixed; color: #4a4a4a; line-height: 1.5; display: flex; flex-direction: column; }
+        .main-content { flex: 1 0 auto; }
+        .header { padding: 2rem 2rem 1rem 2rem; max-width: 1200px; margin: 0 auto; width: 100%; }
+        h1 { font-size: 2.5rem; font-weight: 300; color: #f2f2f2; display: inline-block; margin-right: 1rem; }
+        .error-code { display: inline-block; background: rgba(80, 80, 255, 0.15); color: #f2f2f2; padding: 0.25rem 0.75rem; border-radius: 4px; font-size: 0.875rem; font-weight: 400; vertical-align: middle; }
+        .header p { margin-top: 0.5rem; color: rgba(242, 242, 242, 0.7); font-size: 1rem; }
+        .header a { color: rgba(100, 100, 255, 0.9); text-decoration: none; }
+        .header a:hover { text-decoration: underline; }
+        .timestamp { margin-top: 0.5rem; color: rgba(242, 242, 242, 0.6); font-size: 0.875rem; }
+        .diagram-section { background: rgba(15, 12, 24, 0.4); border-top: 1px solid rgba(80, 80, 255, 0.15); border-bottom: 1px solid rgba(80, 80, 255, 0.15); padding: 3rem 2rem; margin-top: 2rem; }
+        .diagram { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-around; align-items: center; gap: 2rem; }
+        .node { text-align: center; flex: 1; max-width: 300px; }
+        .icon-wrapper { position: relative; display: inline-block; margin-bottom: 1rem; }
+        .icon-container { width: 120px; height: 120px; margin: 0 auto; display: flex; align-items: center; justify-content: center; background: rgba(224, 224, 224, 0.1); border-radius: 8px; border: 2px solid rgba(153, 153, 153, 0.3); }
+        .icon-container svg { width: 64px; height: 64px; stroke: #999; stroke-width: 1.5; }
+        .status-badge { position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%); width: 40px; height: 40px; border-radius: 50%; border: 3px solid rgba(15, 12, 24, 0.4); display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.5rem; }
+        .status-badge svg { width: 20px; height: 20px; stroke: white; stroke-width: 3; }
+        .status-working { background: #84cc16; }
+        .status-error { background: #dc2626; }
+        .node-label { color: rgba(242, 242, 242, 0.6); font-size: 0.875rem; margin-bottom: 0.25rem; }
+        .node-title { color: rgba(100, 100, 255, 0.9); font-size: 1.125rem; margin-bottom: 0.5rem; font-weight: 500; }
+        .node-status { font-size: 1rem; font-weight: 500; }
+        .status-working-text { color: #84cc16; }
+        .status-error-text { color: #dc2626; }
+        .content { max-width: 1200px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; width: 100%; }
+        h2 { font-size: 1.75rem; font-weight: 400; color: #f2f2f2; margin-bottom: 1rem; }
+        .content p { color: rgba(242, 242, 242, 0.8); line-height: 1.6; }
+        .footer { flex-shrink: 0; text-align: center; padding: 2rem; color: rgba(242, 242, 242, 0.5); font-size: 0.8125rem; border-top: 1px solid rgba(80, 80, 255, 0.1); width: 100%; }
+        .footer-content { max-width: 1200px; margin: 0 auto; }
+        .footer a { color: rgba(100, 100, 255, 0.9); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .ray-id { color: rgba(242, 242, 242, 0.6); }
+        @media (max-width: 768px) {
+          h1 { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+          .error-code { display: block; width: fit-content; }
+          .diagram { flex-direction: column; gap: 3rem; }
+          .node { max-width: 100%; }
+          .content { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1rem; }
+          .diagram-section { padding: 2rem 1rem; }
+          .header { padding: 1.5rem 1rem; }
+          .footer { padding: 1.5rem 1rem; font-size: 0.75rem; }
+        }
+      `}</style>
       <div className="main-content">
         <div className="header">
           <h1>Service unavailable</h1>
