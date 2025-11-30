@@ -1,9 +1,28 @@
-"use client"
-
 import type React from "react"
+import type { Metadata } from "next"
 import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, Lock, Check, X } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "401 Unauthorized | Zone Bind Network",
+  description: "Authorization required to access this resource.",
+  robots: "noindex, nofollow",
+  openGraph: {
+    title: "401 Unauthorized - Zone Bind Network",
+    description: "Authorization required to access this resource.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "401 Unauthorized - Zone Bind Network",
+    description: "Authorization required to access this resource.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  icons: {
+    icon: "https://cdn.ricardoneud.com/zone-bind/logo.png",
+  },
+}
 
 function Error401Content() {
   const searchParams = useSearchParams()

@@ -1,9 +1,28 @@
-"use client"
-
 import type React from "react"
+import type { Metadata } from "next"
 import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, ShieldBan, Check, X } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "403 Forbidden | Zone Bind Network",
+  description: "Access to this resource is forbidden.",
+  robots: "noindex, nofollow",
+  openGraph: {
+    title: "403 Forbidden - Zone Bind Network",
+    description: "Access to this resource is forbidden.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "403 Forbidden - Zone Bind Network",
+    description: "Access to this resource is forbidden.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  icons: {
+    icon: "https://cdn.ricardoneud.com/zone-bind/logo.png",
+  },
+}
 
 function Error403Content() {
   const searchParams = useSearchParams()

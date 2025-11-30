@@ -1,9 +1,28 @@
-"use client"
-
 import type React from "react"
+import type { Metadata } from "next"
 import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, FileQuestion, Check, X } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "404 Not Found | Zone Bind Network",
+  description: "The page you are looking for could not be found.",
+  robots: "noindex, nofollow",
+  openGraph: {
+    title: "404 Not Found - Zone Bind Network",
+    description: "The page you are looking for could not be found.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "404 Not Found - Zone Bind Network",
+    description: "The page you are looking for could not be found.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  icons: {
+    icon: "https://cdn.ricardoneud.com/zone-bind/logo.png",
+  },
+}
 
 function Error404Content() {
   const searchParams = useSearchParams()

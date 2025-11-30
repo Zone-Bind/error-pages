@@ -1,9 +1,28 @@
-"use client"
-
 import type React from "react"
+import type { Metadata } from "next"
 import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, AlertTriangle, Check, X } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "503 Service Unavailable | Zone Bind Network",
+  description: "Service temporarily unavailable.",
+  robots: "noindex, nofollow",
+  openGraph: {
+    title: "503 Service Unavailable - Zone Bind Network",
+    description: "Service temporarily unavailable.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "503 Service Unavailable - Zone Bind Network",
+    description: "Service temporarily unavailable.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  icons: {
+    icon: "https://cdn.ricardoneud.com/zone-bind/logo.png",
+  },
+}
 
 function Error503Content() {
   const searchParams = useSearchParams()

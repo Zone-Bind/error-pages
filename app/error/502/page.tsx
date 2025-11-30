@@ -1,9 +1,28 @@
-"use client"
-
 import type React from "react"
+import type { Metadata } from "next"
 import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, ServerOff, Check, X } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "502 Bad Gateway | Zone Bind Network",
+  description: "The server is currently unavailable.",
+  robots: "noindex, nofollow",
+  openGraph: {
+    title: "502 Bad Gateway - Zone Bind Network",
+    description: "The server is currently unavailable.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "502 Bad Gateway - Zone Bind Network",
+    description: "The server is currently unavailable.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  icons: {
+    icon: "https://cdn.ricardoneud.com/zone-bind/logo.png",
+  },
+}
 
 function Error502Content() {
   const searchParams = useSearchParams()

@@ -1,9 +1,28 @@
-"use client"
-
 import type React from "react"
+import type { Metadata } from "next"
 import { useEffect, useState, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import { AppWindow, Server, ServerOff, Check, X } from "lucide-react"
+
+export const metadata: Metadata = {
+  title: "500 Internal Server Error | Zone Bind Network",
+  description: "The server encountered an internal error.",
+  robots: "noindex, nofollow",
+  openGraph: {
+    title: "500 Internal Server Error - Zone Bind Network",
+    description: "The server encountered an internal error.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  twitter: {
+    card: "summary",
+    title: "500 Internal Server Error - Zone Bind Network",
+    description: "The server encountered an internal error.",
+    images: ["https://cdn.ricardoneud.com/zone-bind/logo.png"],
+  },
+  icons: {
+    icon: "https://cdn.ricardoneud.com/zone-bind/logo.png",
+  },
+}
 
 function Error500Content() {
   const searchParams = useSearchParams()
