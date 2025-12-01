@@ -1,18 +1,24 @@
 "use client"
 
 import type React from "react"
-import { useEffect, useState, Suspense } from "react"
-import { useSearchParams } from "next/navigation"
+import { useEffect, useState } from "react"
 import { AppWindow, Server, ServerOff, Check, X } from "lucide-react"
 
-function Error500Content() {
-  const searchParams = useSearchParams()
+export default async function Error500(props: {
+  searchParams: Promise<{ location?: string }>
+}) {
+  const searchParams = await props.searchParams
+  const location = searchParams.location || "Amsterdam"
+
+  return <Error500Content location={location} />
+}
+
+function Error500Content({ location }: { location: string }) {
   const [timestamp, setTimestamp] = useState("")
   const [rayId, setRayId] = useState("")
   const [hostname, setHostname] = useState("www.example.com")
   const [ipAddress, setIpAddress] = useState<string | null>(null)
   const [showIp, setShowIp] = useState(false)
-  const location = searchParams.get("location") || "Amsterdam"
 
   useEffect(() => {
     setTimestamp(new Date().toISOString().replace("T", " ").substring(0, 19) + " UTC")
@@ -89,7 +95,11 @@ function Error500Content() {
           <h1>Internal server error</h1>
           <span className="error-code">Error code 500</span>
           <p>
-            Visit <a href="https://zone-bind.com/error/500" target="_blank" rel="noopener noreferrer">zone-bind.com</a> for more information.
+            Visit{" "}
+            <a href="https://zone-bind.com/error/500" target="_blank" rel="noopener noreferrer">
+              zone-bind.com
+            </a>{" "}
+            for more information.
           </p>
           <p className="timestamp">{timestamp}</p>
         </div>
@@ -98,8 +108,12 @@ function Error500Content() {
           <div className="diagram">
             <div className="node">
               <div className="icon-wrapper">
-                <div className="icon-container"><AppWindow /></div>
-                <div className="status-badge status-working"><Check /></div>
+                <div className="icon-container">
+                  <AppWindow />
+                </div>
+                <div className="status-badge status-working">
+                  <Check />
+                </div>
               </div>
               <div className="node-label">You</div>
               <div className="node-title">Browser</div>
@@ -108,8 +122,12 @@ function Error500Content() {
 
             <div className="node">
               <div className="icon-wrapper">
-                <div className="icon-container"><Server /></div>
-                <div className="status-badge status-working"><Check /></div>
+                <div className="icon-container">
+                  <Server />
+                </div>
+                <div className="status-badge status-working">
+                  <Check />
+                </div>
               </div>
               <div className="node-label">{location}</div>
               <div className="node-title">Zone Bind</div>
@@ -118,8 +136,12 @@ function Error500Content() {
 
             <div className="node">
               <div className="icon-wrapper">
-                <div className="icon-container"><ServerOff /></div>
-                <div className="status-badge status-error"><X /></div>
+                <div className="icon-container">
+                  <ServerOff />
+                </div>
+                <div className="status-badge status-error">
+                  <X />
+                </div>
               </div>
               <div className="node-label">{hostname}</div>
               <div className="node-title">Host</div>
@@ -142,21 +164,19 @@ function Error500Content() {
 
       <div className="footer">
         <div className="footer-content">
-          <span className="ray-id">Zone Bind Ray ID: <span>{rayId}</span></span> • Your IP:{" "}
+          <span className="ray-id">
+            Zone Bind Ray ID: <span>{rayId}</span>
+          </span>{" "}
+          • Your IP:{" "}
           <a href="#" onClick={handleIpReveal} style={{ cursor: showIp ? "default" : "pointer" }}>
             {showIp ? ipAddress : "Click to reveal"}
-          </a>{" "}• Performance & security by{" "}
-          <a href="https://zone-bind.com" target="_blank" rel="noopener noreferrer">Zone Bind</a>
+          </a>{" "}
+          • Performance & security by{" "}
+          <a href="https://zone-bind.com" target="_blank" rel="noopener noreferrer">
+            Zone Bind
+          </a>
         </div>
       </div>
     </>
-  )
-}
-
-export default function Error500() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <Error500Content />
-    </Suspense>
   )
 }
